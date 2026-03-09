@@ -5,9 +5,11 @@ USE ElearningDB;
 GO
 
 -- Create SQL Server Login (if not exists)
-IF NOT EXISTS (SELECT * FROM sys.server_principals WHERE name = 'sManager')
+IF NOT EXISTS (SELECT *
+FROM sys.server_principals
+WHERE name = 'sManager')
 BEGIN
-    CREATE LOGIN sManager WITH PASSWORD = 'sManager123!';
+    CREATE LOGIN sManager WITH PASSWORD = 'sManager';
     PRINT 'Login sManager created successfully.';
 END
 ELSE
@@ -17,7 +19,9 @@ END
 GO
 
 -- Create Database User for the Login (if not exists)
-IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = 'sManager')
+IF NOT EXISTS (SELECT *
+FROM sys.database_principals
+WHERE name = 'sManager')
 BEGIN
     CREATE USER sManager FOR LOGIN sManager;
     PRINT 'User sManager created successfully.';
@@ -34,13 +38,13 @@ PRINT 'sManager added to db_owner role - Full access granted.';
 GO
 
 -- Verify the user and permissions
-SELECT 
+SELECT
     dp.name AS UserName,
     dp.type_desc AS UserType,
     r.name AS RoleName
 FROM sys.database_principals dp
-LEFT JOIN sys.database_role_members drm ON dp.principal_id = drm.member_principal_id
-LEFT JOIN sys.database_principals r ON drm.role_principal_id = r.principal_id
+    LEFT JOIN sys.database_role_members drm ON dp.principal_id = drm.member_principal_id
+    LEFT JOIN sys.database_principals r ON drm.role_principal_id = r.principal_id
 WHERE dp.name = 'sManager'
 ORDER BY dp.name, r.name;
 GO
@@ -49,7 +53,7 @@ PRINT '==============================================';
 PRINT 'User sManager setup completed!';
 PRINT 'Login credentials:';
 PRINT '  Username: sManager';
-PRINT '  Password: sManager123!';
+PRINT '  Password: sManager';
 PRINT '  Roles: db_owner (full access)';
 PRINT '==============================================';
 GO
