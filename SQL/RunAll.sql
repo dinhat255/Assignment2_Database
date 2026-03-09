@@ -823,7 +823,7 @@ GO
 
 -- Tạo SQL Server Login
 CREATE LOGIN sManager 
-WITH PASSWORD = 'sManager123!',
+WITH PASSWORD = 'sManager',
      DEFAULT_DATABASE = ElearningDB,
      CHECK_POLICY = OFF;
 GO
@@ -839,7 +839,7 @@ GO
 PRINT N'========================================';
 PRINT N'Da tao user sManager thanh cong!';
 PRINT N'Login: sManager';
-PRINT N'Password: sManager123!';
+PRINT N'Password: sManager';
 PRINT N'Role: db_owner (Full access)';
 PRINT N'========================================';
 GO
